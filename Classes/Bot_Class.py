@@ -13,7 +13,7 @@ class Bot(commands.Bot):
         intents.message_content = True
 
         discord.utils.setup_logging(level=logging.INFO)
-        super().__init__(command_prefix="b!", intents=intents)
+        super().__init__(command_prefix="x!", intents=intents)
 
     async def load_extensions(self):
         # Load all Functions from the Functions folder
