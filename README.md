@@ -18,11 +18,32 @@ This project began back in September 2024, but with a slightly less appropriate 
 > Instructions on creating a Lavalink server can be found here: [https://lavalink.dev/getting-started](https://lavalink.dev/getting-started). Add the server's URI, port and password in Bot_Class.     Alternatively, you can use a public node, but this is not advisable.  
 > You may want to bypass Youtube's OAuth2. Instructions can be found in [here](https://github.com/lavalink-devs/youtube-source?tab=readme-ov-file#plugin)
 
-    
+## Installation
 
-## Instructions
-- First create a Discord Application on the [Discord Developer Portal](https://discord.com/developers/applications)
-- Insert the token in Bot.py (an environment variable is recommended but I'm too lazy for that)
+- Clone the project.
+
+```bash
+git clone https://github.com/AvaShZmu/XLCog.git
+cd XLCog
+pip install -r requirements.txt
+```
+- Create a Discord Application on the [Discord Developer Portal](https://discord.com/developers/applications).
+- Insert the token in Bot.py (an environment variable is recommended but I'm too lazy for that).
+- Run Bot.py
+
+```bash
+python Bot.py
+```
+
+- If you don't want wavelink support, then delete the following in Bot_Class:
+```python
+async def setup_hook(self) -> None:
+    nodes = [wavelink.Node(uri="...", password="...", inactive_player_timeout=...)]
+    await wavelink.Pool.connect(nodes=nodes, client=self, cache_capacity=100)
+
+async def on_wavelink_node_ready(self, payload: wavelink.NodeReadyEventPayload) -> None:
+    logging.info("Wavelink Node connected: %r | Resumed: %s", payload.node, payload.resumed)
+```
 
 ## 📸 Screenshots  
 
